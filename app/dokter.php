@@ -53,7 +53,7 @@
           include('edit/edit_data_periksa_pasien.php');
         }
         else if($_GET['page']=='data-riwayat-pasien'){
-          include('data_riwayat_pasien.php');
+          include('data_riwayat_pasienn.php');
         }
         else{
           include('not_found.php');
