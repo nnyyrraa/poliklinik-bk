@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 01, 2024 at 09:06 PM
+-- Generation Time: Jan 07, 2024 at 07:27 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.3.30
 
@@ -48,7 +48,14 @@ INSERT INTO `daftar_poli` (`id`, `id_pasien`, `id_jadwal`, `keluhan`, `no_antria
 (6, 14, 1, 'Batuk dan pilek', 4, '0'),
 (7, 14, 3, 'Infeksi mata kanan', 3, '0'),
 (8, 14, 3, 'Katarak', 4, '0'),
-(9, 14, 1, 'Diare', 5, '0');
+(9, 14, 1, 'Diare', 5, '0'),
+(10, 15, 3, 'Kelilipan', 5, '0'),
+(11, 18, 2, 'Tidak bisa melek', 1, '0'),
+(12, 18, 3, 'Rabun Jauh', 6, '0'),
+(13, 14, 1, 'Pusing', 6, '0'),
+(14, 23, 13, 'Cabut Gigi', 1, '1'),
+(15, 24, 10, 'Cek Behel', 1, '1'),
+(16, 25, 13, 'Berlubang', 2, '0');
 
 -- --------------------------------------------------------
 
@@ -67,7 +74,11 @@ CREATE TABLE `detail_periksa` (
 --
 
 INSERT INTO `detail_periksa` (`id`, `id_periksa`, `id_obat`) VALUES
-(5, 2, 4);
+(5, 2, 4),
+(6, 3, 5),
+(7, 3, 6),
+(8, 4, 4),
+(9, 4, 5);
 
 -- --------------------------------------------------------
 
@@ -105,17 +116,20 @@ CREATE TABLE `jadwal_periksa` (
   `id_dokter` int(11) NOT NULL,
   `hari` enum('Senin','Selasa','Rabu','Kamis','Jumat','Sabtu') NOT NULL,
   `jam_mulai` time NOT NULL,
-  `jam_selesai` time NOT NULL
+  `jam_selesai` time NOT NULL,
+  `aktif` char(1) NOT NULL DEFAULT 'N'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `jadwal_periksa`
 --
 
-INSERT INTO `jadwal_periksa` (`id`, `id_dokter`, `hari`, `jam_mulai`, `jam_selesai`) VALUES
-(1, 21, 'Selasa', '07:00:00', '12:00:00'),
-(2, 24, 'Jumat', '08:00:00', '15:30:00'),
-(3, 22, 'Rabu', '13:00:00', '20:00:00');
+INSERT INTO `jadwal_periksa` (`id`, `id_dokter`, `hari`, `jam_mulai`, `jam_selesai`, `aktif`) VALUES
+(1, 21, 'Selasa', '07:00:00', '12:00:00', 'Y'),
+(2, 24, 'Jumat', '08:00:00', '15:30:00', 'N'),
+(3, 22, 'Rabu', '13:00:00', '20:00:00', 'Y'),
+(10, 25, 'Kamis', '12:30:00', '16:00:00', 'Y'),
+(13, 25, 'Sabtu', '09:00:00', '17:00:00', 'Y');
 
 -- --------------------------------------------------------
 
@@ -136,7 +150,9 @@ CREATE TABLE `obat` (
 
 INSERT INTO `obat` (`id`, `nama_obat`, `kemasan`, `harga`) VALUES
 (3, 'Vitamin C', '50ml', 15000),
-(4, 'Panadol', '500ml', 25000);
+(4, 'Panadol', '500ml', 25000),
+(5, 'Cataflam', '50 mg', 20000),
+(6, 'Panadol Extra', '10 kaplet', 35000);
 
 -- --------------------------------------------------------
 
@@ -170,7 +186,21 @@ INSERT INTO `pasien` (`id`, `nama`, `password`, `alamat`, `no_ktp`, `no_hp`, `no
 (10, 'Jaka', '$2y$10$oImZPRY9DdiQH4SJETMcU.lAcLV.fDOdl7C1nMXLfZKzUB.x7OOWO', 'Bekasi', '332487593', '0857382623', '202401-010'),
 (12, 'Jojo', '$2y$10$yli76q0IZ.tn4tsQuCDoLO3kc5l95ML9ToivbsVtE0mLnwFbGl8/S', 'Brebes', '3332874', '08237', '202401-012'),
 (13, 'Nini', '$2y$10$Ue3H05D8SyzbFCSbYqfpae1EVTRolymc350t3bzOtjEnk9RtqhdBq', 'Tegal', '332984', '083247239', '202401-013'),
-(14, 'Rara', '$2y$10$J5xeC72.6kF8GMy87wx6X.o8E62NcZwP4vhOTarn8oVAT92Ee.V6G', 'Surakarta', '33298492', '023849283', '202401-014');
+(14, 'Rara', '$2y$10$J5xeC72.6kF8GMy87wx6X.o8E62NcZwP4vhOTarn8oVAT92Ee.V6G', 'Surakarta', '33298492', '023849283', '202401-014'),
+(15, 'Lili', '$2y$10$UxkKD81XYZT48uBFCajoVOsQWtkUua0Na7DLnLomiOGFljfoOnhne', 'Pemalang', '234873298', '083292', '202401-015'),
+(16, 'Niko', '$2y$10$Xx1c3A9zuS215Eg0tCDwR.SJkFbLuCmEhvVnC4EaTWAupoVysjNm.', 'Malang', '33423984', '0893893', '202401-016'),
+(17, 'Reza', '$2y$10$RJFyfuNn0Vo4vxfTlkZjyu3Z4Z6WSF4R.KRMLTva08VU6zGg/pfNK', 'Wonosobo', '332846392', '083276478', '202401-017'),
+(18, 'Riri', '$2y$10$D7GWjK5gwyaVyXRZ1vPEw.mREObsikWg4UkIM0ZgmTH5qJK5OD55W', 'Pujasera', '3324739', '088329832', '202401-018'),
+(19, 'Nani', '$2y$10$E6XvONaeelqOmaG4KwXWPOvvV6dq4ROrWjiDeX5ZyjspwllkOl3gG', 'Jepang', '3328237498', '087236472', '202401-019'),
+(20, 'Ira', '$2y$10$QyHIr1c64qwNrag8I/LIu.R9tMKgTveYhbwMnwCO1DNfxPKeVeKZW', 'Sragi', '33882', '08683484', '202401-020'),
+(21, 'Rara', '$2y$10$0zOTLYtt8YP50OmfIeR/lO.19I/SvalRjOAOXgzsJv6mJAw2nJ/oW', 'Batang', '332893', '08573982', '202401-021'),
+(22, 'Nana', '$2y$10$WYUlH6ubcLTen2b5VCDR0u3BgwmD7N5UBa1HENxz7H3M9Y3.ej7dq', 'Solo', '001', '08777777', '202401-022'),
+(23, 'Rina', '$2y$10$UEDULiF6qxtxAwvwY5/uh.hStk3iU.VCRDjK15U4ziotuHmhm4JT2', 'Batang', '005', '08678578', '202401-023'),
+(24, 'Dani', '$2y$10$VZTHBUL3SNgaX7bzgfa7Oewkgr1KkcUOUraOOeR2MWgt4EH4EWSve', 'Bojong', '332898', '08289839', '202401-024'),
+(25, 'Kiki', '$2y$10$7IIfblvVZG5/WUTAQbKvv.CMW9NotlybpWk5tXoq6xnca0F34ah1G', 'Serang', '338953', '08438292', '202401-025'),
+(26, 'Mei mei', '$2y$10$77elwRnyYXsVkLKGOTtOnO6CIPRFRm.5fyYLTp1xj3p4koQ/oiw72', 'Kebumen', '002', '0328493', '202401-026'),
+(27, 'Lala', '$2y$10$R/whzjIpQ3OSKplL.4yW7eLIUOWvzgeY0Y6gYkkdgj7lDuKZSdrQ2', 'Banyumanik', '6584', '0239032', '202401-027'),
+(28, 'Karin', '$2y$10$Nj725Bh4/VWc0wBFtK7y0uGiqOb1qor/uz8wNknDnBKcJZmLesLEW', 'Korea', '001', '089328439', '202401-028');
 
 -- --------------------------------------------------------
 
@@ -192,7 +222,9 @@ CREATE TABLE `periksa` (
 
 INSERT INTO `periksa` (`id`, `id_daftar_poli`, `tgl_periksa`, `catatan`, `biaya_periksa`) VALUES
 (1, 2, '2023-12-13 09:00:00', 'jangan makan pedas terlalu banyak dan jajanan diluar rumah', 200000),
-(2, 1, '2023-09-05 14:00:00', 'jangan terlalu stres', 150000);
+(2, 1, '2023-09-05 14:00:00', 'jangan terlalu stres', 150000),
+(3, 15, '2024-01-01 09:30:00', 'Ganti kawat gigi dan minum obat 2x1 hari', 150000),
+(4, 14, '2024-01-07 11:34:00', 'Berlubang', 150000);
 
 -- --------------------------------------------------------
 
@@ -282,13 +314,13 @@ ALTER TABLE `poli`
 -- AUTO_INCREMENT for table `daftar_poli`
 --
 ALTER TABLE `daftar_poli`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `detail_periksa`
 --
 ALTER TABLE `detail_periksa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `dokter`
@@ -300,25 +332,25 @@ ALTER TABLE `dokter`
 -- AUTO_INCREMENT for table `jadwal_periksa`
 --
 ALTER TABLE `jadwal_periksa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `obat`
 --
 ALTER TABLE `obat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `pasien`
 --
 ALTER TABLE `pasien`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `periksa`
 --
 ALTER TABLE `periksa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `poli`
