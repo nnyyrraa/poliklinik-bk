@@ -3,7 +3,6 @@
 <?php
 include('../conf/config_poliklinik.php');
 
-$id_dokter = $_SESSION['id'];
 $nama_dokter = $_SESSION['nama'];
 ?>
 
