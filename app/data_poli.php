@@ -131,11 +131,13 @@
                 <tbody>
                   <?php
                     $no = 1;
-                    $query = mysqli_query($koneksi,"SELECT daftar_poli.id, daftar_poli.no_antrian, jadwal_periksa.hari, jadwal_periksa.jam_mulai, jadwal_periksa.jam_selesai, dokter.nama, poli.nama_poli 
+                    $query = mysqli_query($koneksi,"SELECT daftar_poli.id, daftar_poli.no_antrian, jadwal_periksa.hari, jadwal_periksa.jam_mulai, jadwal_periksa.jam_selesai, dokter.nama, poli.nama_poli
                                                     FROM daftar_poli 
                                                     LEFT JOIN jadwal_periksa ON daftar_poli.id_jadwal = jadwal_periksa.id
                                                     LEFT JOIN dokter ON jadwal_periksa.id_dokter = dokter.id
                                                     LEFT JOIN poli ON dokter.id_poli = poli.id
+                                                    LEFT JOIN pasien ON daftar_poli.id_pasien = pasien.id
+                                                    WHERE pasien.nama = '$nama'
                                                     ORDER BY daftar_poli.id DESC");
                     while ($dok = mysqli_fetch_array($query)) {
 
