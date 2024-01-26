@@ -17,15 +17,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit();
     }
 
-    // Hash the password
-    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-
     // Insert user into the database
-    $query = mysqli_query($koneksi, "SELECT * FROM dokter WHERE nama='$nama' AND password='$hashedPassword'");
+    $query = mysqli_query($koneksi, "SELECT * FROM dokter WHERE nama='$nama'");
+    $user = mysqli_fetch_assoc($query);
     if (!$query) {
         die('Error: ' . mysqli_error($koneksi));
     }
-    if ($query) {
+    if ($user && password_verify($password, $user['password'])) {
         $_SESSION['nama'] = $nama;
         header("Location:../app/dokter.php?page=dashboard"); // Successful login, redirect to dashboard
         exit();

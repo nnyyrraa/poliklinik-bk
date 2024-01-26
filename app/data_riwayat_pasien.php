@@ -86,7 +86,7 @@ $nama_dokter = $_SESSION['nama'];
                                     </div>
                                     <div class="modal-body">
                                       <div class="card-body table-responsive p-0">
-                                        <table class="table table-hover text-nowrap">
+                                        <table class="table table-hover text-nowrap" id="example1">
                                           <thead>
                                             <tr>
                                               <td>No</td>

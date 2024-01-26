@@ -34,5 +34,13 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="dokter.php?page=data-profil" class="nav-link <?php echo ($_GET['page'] == 'data-profil') ? 'active' : ''; ?>">
+              <i class="nav-icon fas fa-user"></i>
+              <p>
+                Profil
+              </p>
+            </a>
+          </li>
         </ul>
     </nav>

@@ -103,7 +103,7 @@ if(isset ($_GET['error'])){
       });
       Toast.fire({
         icon: 'error',
-        title: 'Login Gagal !'
+        title: 'Username atau Password tidak cocok !'
       })
     </script>";
   }

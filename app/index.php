@@ -58,6 +58,18 @@
         else if($_GET['page']=='edit-data-obat'){
           include('edit/edit_data_obat.php');
         }
+        else if($_GET['page']=='data-pasien'){
+          include('data_pasien.php');
+        }
+        else if($_GET['page']=='edit-data-pasien'){
+          include('edit/edit_data_pasien.php');
+        }
+        else if($_GET['page']=='kelola-poli'){
+          include('kelola_poli.php');
+        }
+        else if($_GET['page']=='edit-data-poli'){
+          include('edit/edit_data_poli.php');
+        }
         else{
           include('not_found.php');
         }

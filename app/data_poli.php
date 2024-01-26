@@ -64,7 +64,7 @@
               <div class="card-body">
                   <input type="hidden" name="id_pasien" value="<?php echo $id_pasien; ?>" required readonly>
                   <div class="form-group">
-                      <label for="exampleInputNamaDokter">Nomor Rekam Medis</label>
+                      <label for="exampleInputNoRm">Nomor Rekam Medis</label>
                       <input type="text" class="form-control" name="no_rm" value="<?php echo $no_rm; ?>" required readonly>
                   </div>
                   <div class="form-group">
