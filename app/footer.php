@@ -82,4 +82,10 @@
       $('#report-admin').load("report_admin.php");
     });
   });
+
+  $(document).ready(function(){
+    setInterval(function(){
+      $('#report-dokter').load("report_dokter.php");
+    });
+  });
 </script>
