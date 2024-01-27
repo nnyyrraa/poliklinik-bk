@@ -76,4 +76,10 @@
       "responsive": true,
     });
   });
+
+  $(document).ready(function(){
+    setInterval(function(){
+      $('#report-admin').load("report_admin.php");
+    });
+  });
 </script>

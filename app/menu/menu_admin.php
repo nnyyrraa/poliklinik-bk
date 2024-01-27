@@ -27,7 +27,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="index.php?page=kelola-poli" class="nav-link <?php echo ($_GET['page'] == 'data-poli') ? 'active' : ''; ?>">
+            <a href="index.php?page=kelola-poli" class="nav-link <?php echo ($_GET['page'] == 'kelola-poli') ? 'active' : ''; ?>">
               <i class="nav-icon fas fa-hospital"></i>
               <p>
                 Poli
