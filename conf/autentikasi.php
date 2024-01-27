@@ -17,13 +17,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit();
     }
 
+    // Hash the password
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
     // Insert user into the database
-    $query = mysqli_query($koneksi, "SELECT * FROM admin_user WHERE username='$username'");
+    $query = mysqli_query($koneksi, "SELECT * FROM admin_user WHERE username='$username' AND password='$hashedPassword'");
     $user = mysqli_fetch_assoc($query);
     if (!$query) {
         die('Error: ' . mysqli_error($koneksi));
     }
-    if ($user && password_verify($password, $user['password'])) {
+    if ($query) {
         $_SESSION['username'] = $username;
         header("Location:../app"); // Successful login, redirect to dashboard
         exit();

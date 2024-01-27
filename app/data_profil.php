@@ -23,7 +23,7 @@
             </div>
             <!-- /.card-header -->
             <!-- form start -->
-            <form method='post' action='update/update_profil.php'>
+            <form method='post' action='update/update_profil.php' enctype='multipart/form-data'>
             <div class="card-body">
                 <div class="form-group">
                     <label for="exampleInputNamaDokter">Nama Dokter</label>
@@ -37,6 +37,11 @@
                 <div class="form-group">
                     <label for="exampleInputTelepon">Telepon Dokter</label>
                     <input type="text" class="form-control" id="exampleInputTelepon" placeholder="Telepon Dokter" name="no_hp" value="<?php echo $view['no_hp']; ?>">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="customFile">Unggah Foto</label>
+                    <div style="padding-bottom: 10px"><img src="foto/<?php echo $view['foto']; ?>" width="200px"></div>
+                    <input type="file" name="foto" class="form-control" id="customFile">
                 </div>
                 <!-- /.card-body -->
             </div>
